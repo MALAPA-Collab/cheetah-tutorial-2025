@@ -1,0 +1,13 @@
+name: cheetah-tutorial-malapa-2025
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.13.2
+  - pip>=25.0.1
+  - pip:
+      - git+https://github.com/desy-ml/cheetah.git # TODO Update to pip at 0.7.2 release
+      - jupyter>=1.1.1
+      - matplotlib>=3.10.1
+      - numpy>=2.2.3
+      - SciencePlots>=2.1.1
+      - torch>=2.6.0

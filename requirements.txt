@@ -1,2 +1,0 @@
-cheetah-accelerator>=0.7
-
