@@ -1,4 +1,4 @@
-name: cheetah-tutorial-malapa-2025
+name: malapa-cheetah-tutorial-2025
 channels:
   - conda-forge
 dependencies:
