@@ -1,0 +1,34 @@
+name: test_notebook
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.13"]
+        include:
+          - os: macos-latest
+            python-version: "3.13"
+          - os: windows-latest
+            python-version: "3.13"
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          miniforge-version: "latest"
+          environment-file: environment.yaml
+      - name: Test the notebook by running it
+        run: |
+          jupyter execute test_fast.ipynb
