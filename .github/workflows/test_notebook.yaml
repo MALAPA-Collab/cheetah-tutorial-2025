@@ -31,4 +31,4 @@ jobs:
           environment-file: environment.yaml
       - name: Test the notebook by running it
         run: |
-          jupyter execute test_fast.ipynb
+          jupyter execute tutorial.ipynb
