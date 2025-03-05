@@ -2,14 +2,18 @@ name: malapa-cheetah-tutorial-2025
 channels:
   - conda-forge
 dependencies:
-  - python>=3.13.2
+  - python>=3.12
   - pip>=25.0.1
   - pip:
+      - botorch>=0.12.0
       - git+https://github.com/desy-ml/cheetah.git # TODO Update to pip at 0.7.2 release
       - jupyter>=1.1.1
       - matplotlib>=3.10.1
       - numpy>=2.2.3
+      - pandas>=2.1.0
       - SciencePlots>=2.1.1
       - scikit-learn>=1.6.1
+      - seaborn>=0.13.0
       - torch>=2.6.0
       - tqdm>=4.67.1
+      - xopt>=2.4.0
