@@ -1,6 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
+  - family-names: Kaiser
+    given-names: Jan
+    affiliation: Deutsches Elektronen-Synchrotron DESY
+    orcid: "https://orcid.org/0000-0003-3445-0678"
   - family-names: Xu
     given-names: Chenran
     affiliation: Karlsruhe Institute of Technology
@@ -9,15 +13,15 @@ authors:
     given-names: Andrea
     affiliation: Karlsruhe Institute of Technology
     orcid: "https://orcid.org/0000-0002-7498-7640"
-  - family-names: Kaiser
-    given-names: Jan
-    affiliation: Deutsches Elektronen-Synchrotron DESY
-    orcid: "https://orcid.org/0000-0003-3445-0678"
+  - family-names: Gonzalez Aguilera
+    given-names: Juan Pablo
+    affiliation: University of Chicago
+    orcid: https://orcid.org/0000-0003-4198-749X
 
-title: "Tutorial on Applying Reinforcement Learning to the Particle Accelerator ARES"
-date-released: 2024-03-25
+title: "Differentiable Simulations Cheetah Tutorial MaLAPA 2025"
+date-released: 2025-04-08
 type: software
-version: 1.0.1
+version: 1.0.0
 doi: 10.5281/zenodo.10777477
 license: GPL-3.0
-url: "https://github.com/machine-learning-tutorial/neural-networks"
+url: "https://github.com/MALAPA-Collab/cheetah-tutorial-2025"

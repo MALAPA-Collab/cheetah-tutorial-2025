@@ -42,13 +42,13 @@ sudo yum install git
 Once you have Git installed open your terminal, go to your desired directory, and type:
 
 ```bash
-git clone https://github.com/RL4AA/rl-tutorial-ares-basic.git
+git clone https://github.com/MALAPA-Collab/cheetah-tutorial-2025
 ```
 
 Then enter the downloaded repository:
 
 ```bash
-cd rl-tutorial-ares-basic
+cd cheetah-tutorial-2025
 ```
 
 ### Get the repository with direct download
@@ -56,28 +56,21 @@ cd rl-tutorial-ares-basic
 Open your terminal, go to your desired directory, and type:
 
 ```bash
-wget https://github.com/RL4AA/rl-tutorial-ares-basic/archive/refs/heads/main.zip
+wget https://github.com/MALAPA-Collab/cheetah-tutorial-2025/archive/refs/heads/main.zip
 unzip main.zip
-cd rl-tutorial-ares-basic
+cd cheetah-tutorial-2025
 ```
 
 ## Getting started
 
 You need to install the dependencies before running the notebooks.
 
-### Install `ffmpeg`
-
-Please also run these commands to install `ffmpeg`:
-
-- OS X: `brew install ffmpeg`
-- Ubuntu: `sudo apt-get install ffmpeg`
-
 ### Using conda
 
 If you don't have conda installed already and want to use conda for environment management, you can install the miniconda as [described here](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
 
-- Create a conda env from the provided env file `conda env create -f environment.yml`
-- Activate the environment with `conda activate rl-icfa`
+- Create a conda env from the provided env file `conda env create -f environment.yaml`
+- Activate the environment with `conda activate malapa-cheetah-tutorial-2025`
 - Additional installation steps:
 
 ```bash
@@ -85,7 +78,7 @@ python -m jupyter contrib nbextension install --user
 python -m jupyter nbextension enable varInspector/main
 ```
 
-- **After the tutorial** you can remove your environment with `conda remove -n rl-icfa --all`
+- **After the tutorial** you can remove your environment with `conda remove -n malapa-cheetah-tutorial-2025 --all`
 
 ### Using venv only
 
@@ -94,7 +87,7 @@ If you do not have conda installed:
 Alternatively, you can create the virtual env with `venv` in the standard library
 
 ```bash
-python -m venv rl-icfa
+python -m venv malapa-cheetah-tutorial-2025
 ```
 
 and activate the env with $ source <venv>/bin/activate (bash) or C:> <venv>/Scripts/activate.bat (Windows)
@@ -134,15 +127,16 @@ This tutorial is uploaded to [Zenodo](https://zenodo.org/doi/10.5281/zenodo.1077
 Please use the following DOI when citing this code:
 
 ```bibtex
-@software{xu_2024_10777477,
-  author       = {Xu, Chenran and
+@software{todo,
+  author       = {Kaiser, Jan,
+                  Xu, Chenran and
                   Santamaria Garcia, Andrea and
-                  Kaiser, Jan},
-  title        = {Tutorial on Applying Reinforcement Learning to the Particle Accelerator {ARES}},
-  month        = {03},
-  year         = {2024},
+                  Gonzalez Aguilera, Juan Pablo},
+  title        = {Differentiable Simulations {Cheetah} Tutorial {MaLAPA} 2025},
+  month        = {04},
+  year         = {2025},
   publisher    = {Zenodo},
-  version      = {v1.0.1},
+  version      = {v1.0.0},
   doi          = {10.5281/zenodo.10777477},
   url          = {https://doi.org/10.5281/zenodo.10777477}
 }
@@ -152,6 +146,6 @@ Please use the following DOI when citing this code:
 
 ## Acknowledgement
 
-This tutorial is developed by [Jan Kaiser](https://github.com/jank324), [Andrea Santamaria Garcia](https://github.com/ansantam), and [Chenran Xu](https://github.com/cr-xu).
+This tutorial is developed by [Jan Kaiser](https://github.com/jank324), [Chenran Xu](https://github.com/cr-xu), [Andrea Santamaria Garcia](https://github.com/ansantam), and [Juan Pablo Gonzalez Aguilera](https://github.com/jp-ga).
 
-The content is based on the tutorial given at the RL4AA'23 workshop: [GitHub repository](https://github.com/RL4AA/RL4AA23)
+The content is based on the [official Cheetah documentation](https://cheetah-accelerator.readthedocs.io/en/latest/), [Cheetah PRAB paper](https://doi.org/10.1103/PhysRevAccelBeams.27.054601), the [Cheetah Demos repository](https://github.com/desy-ml/cheetah-demos), and [TODO pahse space under construction](https://i.pinimg.com/736x/33/5c/e0/335ce01208a3cc1e9a9e3149e07b5bc9.jpg).
