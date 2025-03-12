@@ -7588,10 +7588,15 @@ If you set up your virtual environment correctly and is activated you should be 
 <h2 style="color: #b51f2a">What is a differentiable simulation?</h2>
 <ul>
 <li>It means that the simulation gives both the value $f(x)=y$ but also the gradient information $\frac{\partial f(x)}{\partial x}$</li>
-<li>Not only that, it can be differentiated with respect to <strong>inputs, parameters, or initial conditions</strong>, meaning we can evaluate how the results of the simulation change with respect to them.</li>
-<li>Having access to the gradient enables the use of gradient-based methods (e.g. gradiente descent) to tune these parameters.</li>
 </ul>
-<p>How is the gradient calculated? $\implies$ with <strong>automatic differentiation</strong></p>
+<a href="https://inspirehep.net/files/114b18d41def5d611f50619a3702a1db">
+<img alt="No description has been provided for this image" src="fig/diff_sim.png" style="width:40%; margin:auto; display:block;"/>
+</a>
+<ul>
+<li>Accessing the partial derivative of the simulation result means we can differentiate it with respect to <strong>inputs, parameters, or initial conditions</strong>, i.e. we can evaluate how the results of the simulation change with respect to them.</li>
+<li>Having access to the gradient enables the use of <strong>gradient-based methods</strong> (e.g. gradient descent) to tune these parameters, which is one of the most efficient ways for optimisation.</li>
+</ul>
+<p style="text-align: center">How is the gradient calculated? with <b>automatic differentiation</b></p>
 </div>
 </div>
 </div>
@@ -7603,16 +7608,14 @@ If you set up your virtual environment correctly and is activated you should be 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">What is automatic differentiation (autodiff)</h2>
+<p><code>autodiff</code> is a way of <strong>calculating gradients</strong> that:</p>
 <ul>
-<li><code>autodiff</code> is an <strong>efficient</strong> ($O(n)$ linear in the cost of computing the value) and <strong>numerically stable</strong> way of <strong>calculating gradients</strong>.</li>
-<li>It's different from symbolic or numerical differentiation, which approximates derivatives using finite differences.</li>
-<li>It leverages the chain rule of calculus to break down complex functions into a <strong>sequence of elementary operations</strong>.</li>
+<li>provides exact derivative values</li>
+<li>is more efficient than numerical methods ($O(n)$ linear in the cost of computing the value)</li>
+<li>can handle complex functions and models</li>
+<li>might struggle with non-differentiable functions</li>
 </ul>
-<p>Every computer calculation, no matter how complicated, executes a sequence of elementary/primitive operations (<code>+</code>, <code>-</code>, <code>x</code>, <code>/</code>) and elementary functions (<code>exp</code>, <code>log</code>, <code>sin</code>, <code>cos</code>) which have specified routines for computing derivatives. By applying the chain rule repeatedly to these operations, partial derivatives of arbitrary order can be computed automaticaly</p>
-<ul>
-<li><code>autodiff</code> explicitly constructs a computational graph, where each node represents an elementary operation and edges represent the flow of values and derivatives.</li>
-</ul>
-<!-- add some illustrations -->
+<p>In symbolic or numerical differentiation the derivatives are approximated using <u>finite differences</u> and can be very <u>computationally expensive</u> and scale poorly with the number of inputs.</p>
 </div>
 </div>
 </div>
@@ -7623,14 +7626,13 @@ If you set up your virtual environment correctly and is activated you should be 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 style="color: #b51f2a">What is autograd?</h2>
-<p><code>autograd</code> is the name of a particular autodiff implementation commonly used in:</p>
+<h2 style="color: #b51f2a">How does autodiff work?</h2>
 <ul>
-<li><strong>Machine learning and deep learning</strong>: frameworks like PyTorch and JAX leverage autograd for gradient-based optimization.</li>
-<li><strong>Scientific computing</strong>: libraries such as TensorFlow use autodiff for numerical modeling and solving differential equations.</li>
-<li><strong>Optimization problems</strong>: used in engineering and economics for parameter tuning.</li>
-<li><strong>Physics simulations</strong>: computes gradients in complex simulations like fluid dynamics.</li>
-<li><strong>Probabilistic programming</strong>: helps with Bayesian inference using gradient-based samplers.</li>
+<li><code>autodiff</code> leverages the chain rule of calculus to break down complex functions into a <strong>sequence of elementary operations</strong>.<ul>
+<li>Every computer calculation, no matter how complicated, executes a sequence of elementary/primitive operations (<code>+</code>, <code>-</code>, <code>x</code>, <code>/</code>) and elementary functions (<code>exp</code>, <code>log</code>, <code>sin</code>, <code>cos</code>) which have <u>specified routines for computing derivatives</u>. By applying the chain rule repeatedly to these operations, partial derivatives of arbitrary order can be computed automaticaly.</li>
+</ul>
+</li>
+<li><code>autodiff</code> explicitly constructs a <strong>computational graph</strong>, where each node represents an elementary operation or variable and edges represent the flow of values and derivatives.</li>
 </ul>
 </div>
 </div>
@@ -7642,14 +7644,42 @@ If you set up your virtual environment correctly and is activated you should be 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 style="color: #b51f2a">How do we use the gradient and backpropagation</h2>
-<p>Autodiff is crucial for computing gradients in:</p>
+<h2 style="color: #b51f2a">How does autodiff work?</h2>
+<p>Say we want to compute the derivative of $z = x^2 + 3xy +1$. We then need:</p>
 <ul>
-<li><strong>Gradient descent</strong>: Used in deep learning and optimization problems.</li>
-<li><strong>Newton's method</strong>: Requires second-order derivatives (Hessian).</li>
-<li><strong>Stochastic Gradient Descent (SGD)</strong>: Used for large-scale optimization.</li>
-<li><strong>Adam, RMSprop, Adagrad</strong>: Adaptive gradient methods in machine learning.</li>
+<li>$u_1 = x^2$ (square operation)</li>
+<li>$u_2 = 3xy$ (multiplication)</li>
+<li>$z = u_1 + u_2 + 1$ (addition)
+<a href="https://e-dorigatti.github.io/math/deep%20learning/2020/04/07/autodiff.html">
+<img alt="test" src="fig/compgraph.png" style="width:60%; margin:auto; display:block;"/>
+</a></li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>$\frac{dz}{dx}$</th>
+<th>$\frac{dz}{dy}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$ \frac{\partial z}{\partial x} = \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial x}$</td>
+<td>$\frac{\partial z}{\partial y} = \frac{\partial u_1}{\partial y} + \frac{\partial u_2}{\partial y}$</td>
+</tr>
+<tr>
+<td>$\frac{\partial u_1}{\partial x} = \frac{\partial (x^2)}{\partial x} = 2x $</td>
+<td>$\frac{\partial u_1}{\partial y} = \frac{\partial (x^2)}{\partial y} = 0$</td>
+</tr>
+<tr>
+<td>$\frac{\partial u_2}{\partial x} = \frac{\partial (3xy)}{\partial x} = 3y $</td>
+<td>$\frac{\partial u_2}{\partial y} = \frac{\partial (3xy)}{\partial y} = 3x$</td>
+</tr>
+<tr>
+<td>$\frac{\partial z}{\partial x} = 2x + 3y$</td>
+<td>$\frac{\partial z}{\partial y} = 3x$</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -7662,18 +7692,12 @@ If you set up your virtual environment correctly and is activated you should be 
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">Forward mode and reverse mode autodiff</h2>
 <h3 id="Forward-mode">Forward mode<a class="anchor-link" href="#Forward-mode">¶</a></h3><ul>
-<li>Efficient when the function has <strong>fewer inputs (parameters) than outputs</strong>.</li>
+<li>Computes derivatives in a single forward pass in the computational graph, computing the derivatives alongside function values.</li>
 <li>Computes derivatives <strong>one input at a time</strong>.</li>
-<li>Uses <strong>dual numbers</strong> for derivative tracking.</li>
-<li>Complexity: <strong>O(1) per input variable</strong>.</li>
-<li>Example: <strong>Jacobian-vector product (JVP)</strong> in JAX.</li>
 </ul>
 <h3 id="Reverse-mode">Reverse mode<a class="anchor-link" href="#Reverse-mode">¶</a></h3><ul>
-<li>Efficient when the function has <strong>more inputs than outputs</strong> (common in deep learning).</li>
+<li>Computes gradients backward in the computational graph using the chain rule (used in <u>backpropagation</u>).</li>
 <li>Computes derivatives <strong>one output at a time</strong> but for all inputs.</li>
-<li>Uses <strong>computational graphs</strong> and backpropagation.</li>
-<li>Complexity: <strong>O(1) per output variable</strong>.</li>
-<li>Example: <strong>Vector-Jacobian product (VJP)</strong> in PyTorch.</li>
 </ul>
 <table>
 <thead>
@@ -7699,6 +7723,25 @@ If you set up your virtual environment correctly and is activated you should be 
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 style="color: #b51f2a">What is autograd?</h2>
+<p><code>autograd</code> is the name of a particular autodiff implementation commonly used in:</p>
+<ul>
+<li><strong>Machine learning and deep learning</strong>: frameworks like PyTorch and JAX leverage autograd for gradient-based optimization.</li>
+<li><strong>Scientific computing</strong>: libraries such as TensorFlow use autodiff for numerical modeling and solving differential equations.</li>
+<li><strong>Optimization problems</strong>: used in engineering and economics for parameter tuning.</li>
+<li><strong>Physics simulations</strong>: computes gradients in complex simulations like fluid dynamics.</li>
+<li><strong>Probabilistic programming</strong>: helps with Bayesian inference using gradient-based samplers.</li>
+</ul>
 </div>
 </div>
 </div>
