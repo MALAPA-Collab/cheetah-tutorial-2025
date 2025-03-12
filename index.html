@@ -7657,8 +7657,8 @@ If you set up your virtual environment correctly and is activated you should be 
 <table>
 <thead>
 <tr>
-<th>$\frac{dz}{dx}$</th>
-<th>$\frac{dz}{dy}$</th>
+<th>$\frac{\partial z}{\partial x}$</th>
+<th>$\frac{\partial z}{\partial y}$</th>
 </tr>
 </thead>
 <tbody>
@@ -7691,14 +7691,37 @@ If you set up your virtual environment correctly and is activated you should be 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">Forward mode and reverse mode autodiff</h2>
+<p>$z = x^2 + 3xy +1 \ ; \ u_1 = x^2 \ ; \ u_2 = 3xy \ ; \ z = u_1 + u_2 + 1$</p>
 <h3 id="Forward-mode">Forward mode<a class="anchor-link" href="#Forward-mode">¶</a></h3><ul>
-<li>Computes derivatives in a single forward pass in the computational graph, computing the derivatives alongside function values.</li>
-<li>Computes derivatives <strong>one input at a time</strong>.</li>
+<li>Propagates derivatives from inputs to outputs in a single forward pass in the computational graph by computing function values and their derivatives simultaneously.<ul>
+<li>the calculation is basically what we saw in the previous slide</li>
+</ul>
+</li>
 </ul>
 <h3 id="Reverse-mode">Reverse mode<a class="anchor-link" href="#Reverse-mode">¶</a></h3><ul>
-<li>Computes gradients backward in the computational graph using the chain rule (used in <u>backpropagation</u>).</li>
-<li>Computes derivatives <strong>one output at a time</strong> but for all inputs.</li>
+<li>Computes gradients backward in the computational graph using the chain rule (used in <u>backpropagation</u>)<ul>
+<li>Start with $ \frac{\partial z}{\partial z} = 1 $</li>
+<li>Compute contributions to intermediate variables:</li>
+<li>$ \frac{\partial z}{\partial u_1} = 1, \quad \frac{\partial z}{\partial u_2} = 1 $</li>
+<li>$ \frac{\partial u_1}{\partial x} = 2x $</li>
+<li>$ \frac{\partial u_2}{\partial x} = 3y, \quad \frac{\partial u_2}{\partial y} = 3x $</li>
+<li>Apply the chain rule:</li>
+<li>$ \frac{\partial z}{\partial x} = \frac{\partial z}{\partial u_1} \cdot \frac{\partial u_1}{\partial x} + \frac{\partial z}{\partial u_2} \cdot \frac{\partial u_2}{\partial x} = 2x + 3y $</li>
+<li>$ \frac{\partial z}{\partial y} = \frac{\partial z}{\partial u_2} \cdot \frac{\partial u_2}{\partial y} = 3x $</li>
 </ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 style="color: #b51f2a">Forward mode and reverse mode autodiff</h2>
 <table>
 <thead>
 <tr>
@@ -7723,6 +7746,9 @@ If you set up your virtual environment correctly and is activated you should be 
 </tr>
 </tbody>
 </table>
+<a href="https://e-dorigatti.github.io/math/deep%20learning/2020/04/07/autodiff.html">
+<img alt="test" src="fig/compgraph.png" style="width:60%; margin:auto; display:block;"/>
+</a>
 </div>
 </div>
 </div>
