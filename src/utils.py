@@ -1,7 +1,11 @@
 """Utility functions for the cheetah tutorial notebook."""
 
+
 import matplotlib.pyplot as plt
 import numpy as np
+import torch
+from torch import nn
+from xopt import VOCS, Evaluator
 
 
 def plot_tuning_history(history: dict, fig=None, figsize=(16, 3)):
@@ -124,3 +128,66 @@ def plot_system_identification_training(
         fig.savefig(save_path)
 
     plt.show()
+
+
+def plot_parameter_space_difference(
+    vocs: VOCS,
+    evaluator: Evaluator,
+    prior_mean_module: nn.Module,
+    num_points: int = 50,
+    figsize: tuple = None,
+) -> plt.Figure:
+    q1 = np.linspace(
+        vocs.variables["q1"][0], vocs.variables["q1"][1], num_points, dtype=np.float32
+    )
+    q2 = np.linspace(
+        vocs.variables["q2"][0], vocs.variables["q2"][1], num_points, dtype=np.float32
+    )
+
+    X, Y = np.meshgrid(q1, q2)
+
+    Z_problem = np.zeros_like(X)
+    for i in range(X.shape[0]):
+        for j in range(X.shape[1]):
+            Z_problem[i, j] = evaluator.evaluate({"q1": X[i, j], "q2": Y[i, j]})["mae"]
+    Z_priormean = (
+        prior_mean_module(torch.tensor(np.stack([X, Y], axis=-1), dtype=torch.float32))
+        .detach()
+        .numpy()
+    )
+
+    figsize = (4, 1.8) if figsize is None else figsize
+    fig, axes = plt.subplots(1, 2, figsize=figsize)
+
+    v_min = min(Z_problem.min(), Z_priormean.min())
+    v_max = max(Z_problem.max(), Z_priormean.max())
+
+    axes[0].contourf(X, Y, Z_problem, levels=20, vmin=v_min, vmax=v_max)
+    axes[1].contourf(X, Y, Z_priormean, levels=20, vmin=v_min, vmax=v_max)
+    # Mark the minimum for both plots
+    idx_min_problem = np.unravel_index(np.argmin(Z_problem, axis=None), Z_problem.shape)
+    axes[0].scatter(
+        q1[idx_min_problem[1]], q2[idx_min_problem[0]], color="red", marker="x"
+    )
+    idx_min_priormean = np.unravel_index(
+        np.argmin(Z_priormean, axis=None), Z_priormean.shape
+    )
+    axes[1].scatter(
+        q1[idx_min_priormean[1]], q2[idx_min_priormean[0]], color="red", marker="x"
+    )
+
+    axes[0].set_title("Optimization Problem")
+    axes[1].set_title("Cheetah Prior Mean Model")
+
+    axes[1].set_yticks([])
+    axes[0].set_ylabel(r"$k_{Q2}$ (1/m)")
+    for ax in axes:
+        ax.set_xlabel(r"$k_{Q1}$ (1/m)")
+
+    # Plot colorbar
+    fig.subplots_adjust(right=0.9)
+    cbar_ax = fig.add_axes([0.95, 0.1, 0.03, 0.8])
+    fig.colorbar(
+        plt.cm.ScalarMappable(cmap="viridis"), cax=cbar_ax, aspect=30, shrink=0.5
+    )
+    cbar_ax.set_ylabel("Beam size (mm)")
