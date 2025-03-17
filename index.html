@@ -7793,7 +7793,7 @@ If you set up your virtual environment correctly and is activated you should be 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">What is Cheetah?</h2>
-<img alt="No description has been provided for this image" src="fig/cheetah_what.png" style="width:100%; margin:auto;"/>
+<img alt="No description has been provided for this image" src="fig/cheetah_what.png" style="width:90%; margin:auto;"/>
 </div>
 </div>
 </div>
@@ -7805,6 +7805,7 @@ If you set up your virtual environment correctly and is activated you should be 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">Some achievements</h2>
+<p>To be filled @Jan</p>
 <ul>
 <li>When was it first launched</li>
 <li>How many downloads up to date</li>
@@ -7821,7 +7822,7 @@ If you set up your virtual environment correctly and is activated you should be 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">Cheetah contributors</h2>
-<p><img alt="No description has been provided for this image" src="fig/cheetah_contributors.png" style="width:100%; margin:auto;"/></p>
+<p><img alt="No description has been provided for this image" src="fig/cheetah_contributors.png" style="width:90%; margin:auto;"/></p>
 </div>
 </div>
 </div>
@@ -8649,11 +8650,12 @@ Such data can be collected parasitically during regular operation of the acceler
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">2 Gradient-based system identification</h2>
-<p>Similar to the previous example, we perform gradient-based optimisation of the misalignments in the Cheetah model until the model best matches our observations from the real accelerator.
-Again, the optimisation problem is wrapped in a <code>torch.nn.Module</code> to enable normalisation of the parameters under optimisation.</p>
-<p>Note that the Cheetah model requires an incoming beam. In a real-world scenario this is not necesarily known, while the transverse position of the incoming beam affects the model and thereby the determined misalignments. Ideally one might have information on the incoming beam from prior measurements (e.g. identification through Cheetah) or simulations.
-Here, we assume we know the incoming beam exactly and use the same beam as in the dataset.
-Further below, we show that this method still works even if the incoming beam is not known exactly.</p>
+<p>Similar to the previous example, we perform gradient-based optimisation of the misalignments in the Cheetah model until the model best matches our observations from the real accelerator.</p>
+<ul>
+<li>Note that the Cheetah model requires an <em>incoming beam</em>. In a real-world scenario this is not necesarily known, while the transverse position of the incoming beam affects the model and thereby the determined misalignments.</li>
+<li>Here, we assume we know the incoming beam exactly and use the same beam as in the dataset.</li>
+<li>Further below, we show that this method still works even if the incoming beam is not known exactly.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -8761,12 +8763,30 @@ Further below, we show that this method still works even if the incoming beam is
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">2 Gradient-based system identification</h2>
-<p>The <code>train</code> function below works much the same as the one used for the magnet setting optimisation. However now, the loss is computed as the error between the outgoing beam parameters from the Cheetah model and the observed beam parameters from the dataset.</p>
-<p>Note that unlike in the previous example, it makes sense to compute the loss over batches of data, which increases optimisation speed and decreases the risk of getting stuck in local minima. This is only possible thanks to Cheetah's native support for vectorised operations.</p>
+<ul>
+<li>Similar procedure to train as previously in the optimisation example.</li>
+<li>Now, the loss is computed as the error between<ul>
+<li>the outgoing beam parameters from the Cheetah model</li>
+<li>and the observed beam parameters from the dataset.</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Unlike in the previous example, it makes sense to compute the loss over batches of data, which increases optimisation speed and decreases the risk of getting stuck in local minima.
+This is only possible thanks to Cheetah's native support for vectorised operations.</p>
+</div>
+</div>
+</div>
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8969,14 +8989,27 @@ Further below, we show that this method still works even if the incoming beam is
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 style="color: #b51f2a">2 Gradient-based system identification</h2>
-<p>We observe that the misalignments in the Cheetah model converge towards the known ground truth misalignments. This demonstrates that gradient-based optimisation can be used for system identification tasks with <em>Cheetah</em>.</p>
+<ul>
+<li>Misalignments in the Cheetah model converge towards the known ground truth misalignments.</li>
+<li>Gradient-based optimisation can be used for system identification tasks with <em>Cheetah</em>.</li>
+</ul>
 <p>However, as previously mentioned, the incoming beam is <em>rarely known exactly</em> in real-world scenarios.</p>
-<p>In the following, we assume a beam that is located in origin of the transverse plane, i.e. at the reference orbit. The goal is then to determine <strong>the misalignments with respect to this orbit</strong>.
-We can now run the same optimisation as before, but with the incoming beam set to the origin.</p>
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In the following, we assume a beam that is located in origin of the transverse plane, i.e. at the reference orbit. The goal is then to determine <strong>the misalignments with respect to this orbit</strong>.</p>
+<p>We can now run the same optimisation as before, but with the incoming beam set to the origin.</p>
+</div>
+</div>
+</div>
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9053,7 +9086,7 @@ We can now run the same optimisation as before, but with the incoming beam set t
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We find that as one would expect, the identified misalignments are now a shifted version of the ground truth misalignments. This information could now be used to move the quadrupole magnets onto the orbit present at the time the dataset was collected. If this was in fact the "golden orbit", the quadrupoles would then be aligned perfectly.</p>
+<p>The identified misalignments are now a shifted version of the ground truth misalignments.</p>
 </div>
 </div>
 </div>
@@ -9101,7 +9134,7 @@ We can now run the same optimisation as before, but with the incoming beam set t
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Interlude:-Bayesian-Optimization-(BO)">Interlude: Bayesian Optimization (BO)<a class="anchor-link" href="#Interlude:-Bayesian-Optimization-(BO)">¶</a></h3><p>BO uses a statistical surrogate model (often a Guassian Process) of the objective functions to efficiently perform complex optimization tasks.</p>
-<img alt="No description has been provided for this image" src="fig/bo_steps.png" width="400"/>
+<p><img alt="No description has been provided for this image" src="fig/bo_steps.png" style="width:80%; margin:auto;"/></p>
 </div>
 </div>
 </div>
