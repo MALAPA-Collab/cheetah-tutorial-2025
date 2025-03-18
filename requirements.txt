@@ -1,6 +1,6 @@
 black
 botorch>=0.12.0
-cheetah-accelerator==0.7.0 # TODO Update to pip at 0.7.2 release
+#cheetah-accelerator==0.7.0 # TODO Update to pip at 0.7.2 release
 flake8
 jupyter>=1.1.1
 matplotlib>=3.10.1
@@ -13,3 +13,6 @@ seaborn>=0.13.0
 torch>=2.6.0
 tqdm>=4.67.1
 xopt>=2.4.0
+lightning
+git+https://github.com/desy-ml/cheetah.git
+git+https://github.com/roussel-ryan/gpsr.git@30-fix-6d-example
