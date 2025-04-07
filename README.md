@@ -3,6 +3,8 @@
 
 # Differentiable Simulations Cheetah Tutorial MaLAPA 2025
 
+_"Differentiable Simulations"_ tutorial presented at the _5th MaLAPA workshop_ at CERN in April 2025.
+
 ## Disclaimer &#x2757;
 
 This repository contains advanced Python tutorials developed with care and dedication to foster learning and collaboration. The code and materials provided here are the result of significant effort, including state-of-the-art research and unpublished or pre-peer-reviewed work.
