@@ -1,45 +1,26 @@
 [![DOI](https://zenodo.org/badge/761710489.svg)](https://zenodo.org/doi/10.5281/zenodo.10777476)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-# Tutorial on Applying Reinforcement Learning to the Particle Accelerator ARES
+# Differentiable Simulations Cheetah Tutorial MaLAPA 2025
 
-You can view the tutorial notebook as [HTML slides here](https://RL4AA.github.io/rl-tutorial-ares-basic/slides.html#/).
+## Disclaimer &#x2757;
 
-## Download the repository
+This repository contains advanced Python tutorials developed with care and dedication to foster learning and collaboration. The code and materials provided here are the result of significant effort, including state-of-the-art research and unpublished or pre-peer-reviewed work.
 
-### Get the repository with Git
+We share these resources in good faith, aiming to contribute to the community and advance knowledge in our field. If you use or build upon any part of this tutorial, whether in research, software, or educational materials, proper citation is required. Please cite the tutorial as indicated in the repository or its associated Zenodo entry.
 
-You will need to have Git previously installed in your computer.
-To check if you have it installed, open your terminal and type:
+While we encourage reuse and adaptation of our work, uncredited use or plagiarism is unacceptable. We actively monitor citations and expect users to engage in responsible scholarly practice. Failure to properly attribute this work may lead to formal actions.
 
-```bash
-git --version
-```
+By using this repository, you acknowledge and respect the effort behind it. We appreciate your support in maintaining academic integrity and fostering an open, collaborative environment.
 
-#### Git installation in macOS
+Happy coding, and thank you for citing responsibly! 😊
 
-```bash
-brew update
-brew install git
-```
+## Getting Started
 
-#### Git installation in Linux
+- You will require about **3 GB of free disk space** &#x2757;
+- Make sure you have Git installed in your terminal &#x2757;
 
-In Ubuntu/Debian
-
-```bash
-sudo apt install git
-```
-
-In CentOS
-
-```bash
-sudo yum install git
-```
-
-## Downloading the repository
-
-Once you have Git installed open your terminal, go to your desired directory, and type:
+Start by cloning locally the repository of the challenge by running this command in your terminal:
 
 ```bash
 git clone https://github.com/MALAPA-Collab/cheetah-tutorial-2025
@@ -51,59 +32,20 @@ Then enter the downloaded repository:
 cd cheetah-tutorial-2025
 ```
 
-### Get the repository with direct download
+### Installing virtual environment
 
-Open your terminal, go to your desired directory, and type:
+#### Using conda-forge
 
-```bash
-wget https://github.com/MALAPA-Collab/cheetah-tutorial-2025/archive/refs/heads/main.zip
-unzip main.zip
-cd cheetah-tutorial-2025
-```
+- If you don't have conda installed already, you can install the `miniforge` as described in the [GitHub repository](https://github.com/conda-forge/miniforge) or download from the [conda-forge site](https://conda-forge.org/download/). Once `miniforge` is installed, you can use the `conda` commands as usual.
+- We recommend installing `miniforge` the day beforehand to avoid network overload during the challenge &#x2757; &#x2757;
 
-## Getting started
-
-You need to install the dependencies before running the notebooks.
-
-### Using conda
-
-If you don't have conda installed already and want to use conda for environment management, you can install the miniconda as [described here](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html).
-
-- Create a conda env from the provided env file `conda env create -f environment.yaml`
-- Activate the environment with `conda activate malapa-cheetah-tutorial-2025`
-- Additional installation steps:
+Once `miniforge` is installed run this command in your terminal:
 
 ```bash
-python -m jupyter contrib nbextension install --user
-python -m jupyter nbextension enable varInspector/main
+conda env create -f environment.yaml
 ```
 
-- **After the tutorial** you can remove your environment with `conda remove -n malapa-cheetah-tutorial-2025 --all`
-
-### Using venv only
-
-If you do not have conda installed:
-
-Alternatively, you can create the virtual env with `venv` in the standard library
-
-```bash
-python -m venv malapa-cheetah-tutorial-2025
-```
-
-and activate the env with $ source <venv>/bin/activate (bash) or C:> <venv>/Scripts/activate.bat (Windows)
-
-Then, install the packages with pip within the activated environment
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Finally, install the notebook extensions if you want to see them in slide mode:
-
-```bash
-python -m jupyter contrib nbextension install --user
-python -m jupyter nbextension enable varInspector/main
-```
+Afterwards, activate the environment with `conda activate malapa-cheetah-tutorial-2025`
 
 Now you should be able to run the provided notebook.
 
@@ -148,4 +90,4 @@ Please use the following DOI when citing this code:
 
 This tutorial is developed by [Jan Kaiser](https://github.com/jank324), [Chenran Xu](https://github.com/cr-xu), [Andrea Santamaria Garcia](https://github.com/ansantam), and [Juan Pablo Gonzalez Aguilera](https://github.com/jp-ga).
 
-The content is based on the [official Cheetah documentation](https://cheetah-accelerator.readthedocs.io/en/latest/), [Cheetah PRAB paper](https://doi.org/10.1103/PhysRevAccelBeams.27.054601), the [Cheetah Demos repository](https://github.com/desy-ml/cheetah-demos), and [TODO pahse space under construction](https://i.pinimg.com/736x/33/5c/e0/335ce01208a3cc1e9a9e3149e07b5bc9.jpg).
+The content is based on the [official Cheetah documentation](https://cheetah-accelerator.readthedocs.io/en/latest/), [Cheetah PRAB paper](https://doi.org/10.1103/PhysRevAccelBeams.27.054601), the [Cheetah Demos repository](https://github.com/desy-ml/cheetah-demos), and the [GPSR (generative phase space reconstruction) package](https://github.com/roussel-ryan/gpsr).
