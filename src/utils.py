@@ -1,6 +1,5 @@
 """Utility functions for the cheetah tutorial notebook."""
 
-
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
