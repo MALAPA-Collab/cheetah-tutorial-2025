@@ -4,6 +4,7 @@ cheetah-accelerator==0.7.1
 flake8
 jupyter>=1.1.1
 matplotlib>=3.10.1
+notebook==6.4.12
 numpy>=2.2.3
 pandas>=2.1.0
 rise==5.7.1
@@ -11,6 +12,7 @@ SciencePlots>=2.1.1
 scikit-learn>=1.6.1
 seaborn>=0.13.0
 torch>=2.6.0
+traitlets==5.9.0
 tqdm>=4.67.1
 xopt>=2.4.0
 lightning
