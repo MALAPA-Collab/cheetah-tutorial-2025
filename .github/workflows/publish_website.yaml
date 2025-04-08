@@ -26,7 +26,7 @@ jobs:
                 mkdir temp
                 cp -r fig/ temp/fig/
                 jupyter nbconvert tutorial.ipynb --to slides --SlidesExporter.reveal_scroll=True
-                mv tutorial.slides.html temp/index.html
+                cp tutorial.slides.html temp/index.html
                 ls -R temp
 
             - name: Deploy
