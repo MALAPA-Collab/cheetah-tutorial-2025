@@ -19,9 +19,9 @@ authors:
     orcid: https://orcid.org/0000-0003-4198-749X
 
 title: "Differentiable Simulations Cheetah Tutorial MaLAPA 2025"
-date-released: 2025-04-07
+date-released: 2025-04-08
 type: software
 version: 1.0.0
-doi: 10.5281/zenodo.10777477
+doi: 10.5281/zenodo.15174030
 license: GPL-3.0
 url: "https://github.com/MALAPA-Collab/cheetah-tutorial-2025"

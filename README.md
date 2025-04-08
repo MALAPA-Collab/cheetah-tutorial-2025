@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/761710489.svg)](https://zenodo.org/doi/42.4242/zenodo.42424242)
+[![DOI](https://zenodo.org/badge/761710489.svg)](https://zenodo.org/doi/10.5281/zenodo.15174030)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Differentiable Simulations Cheetah Tutorial MaLAPA 2025
@@ -67,7 +67,7 @@ Alternatively, you can use supported Editor to run the jupyter notebooks, e.g. w
 
 ## Citing the tutorial
 
-This tutorial is uploaded to [Zenodo](https://zenodo.org/doi/42.4242/zenodo.42424242).
+This tutorial is uploaded to [Zenodo](https://doi.org/10.5281/zenodo.15174030).
 Please use the following DOI when citing this code:
 
 ```bibtex
@@ -77,8 +77,8 @@ Please use the following DOI when citing this code:
     year         = 2025,
     month        = {04},
     publisher    = {Zenodo},
-    doi          = {42.4242/zenodo.42424242},
-    url          = {https://doi.org/42.4242/zenodo.42424242},
+    doi          = {10.5281/zenodo.15174030},
+    url          = {https://doi.org/10.5281/zenodo.15174030},
     version      = {v1.0.0}
 }
 ```
