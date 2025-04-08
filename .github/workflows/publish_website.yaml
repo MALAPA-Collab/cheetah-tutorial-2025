@@ -25,7 +25,7 @@ jobs:
               run: |
                 mkdir temp
                 cp -r fig/ temp/fig/
-                jupyter nbconvert tutorial.ipynb --to slides
+                jupyter nbconvert tutorial.ipynb --to slides --SlidesExporter.reveal_scroll=True
                 mv tutorial.slides.html temp/index.html
                 ls -R temp
 
